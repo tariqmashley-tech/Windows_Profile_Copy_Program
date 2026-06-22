@@ -1,0 +1,129 @@
+using System.Diagnostics;
+
+namespace ProfileMigrator;
+
+public class Program
+{
+    private static readonly string[] FoldersToCopy =
+    {
+        @"Desktop",
+        @"Documents",
+        @"Downloads",
+        @"Pictures",
+        @"Videos",
+        @"Music",
+        @"Favorites",
+        @"AppData\Roaming",
+        @"AppData\Local"
+    };
+
+    public static int Main(string[] args)
+    {
+        if (args.Length != 2)
+        {
+            Console.WriteLine("Usage:");
+            Console.WriteLine(@"ProfileMigrator.exe ""C:\Users\OldADProfile"" ""C:\Users\NewEntraProfile""");
+            return 1;
+        }
+
+        var sourceProfile = args[0].TrimEnd('\\');
+        var destinationProfile = args[1].TrimEnd('\\');
+
+        if (!Directory.Exists(sourceProfile))
+        {
+            Console.WriteLine($"Destination profile does not exist: {destinationProfile}");
+            PauseBeforeExit();
+            return 1;
+        }
+
+        if (!Directory.Exists(destinationProfile))
+        {
+            Console.WriteLine($"Source profile does not exist: {sourceProfile}");
+            PauseBeforeExit();
+            return 1;
+        }
+
+        Console.WriteLine("Begin Profile Migration");
+        Console.WriteLine($"AD Profile:    {sourceProfile}");
+        Console.WriteLine($"Entra Profile: {destinationProfile}");
+        Console.WriteLine();
+
+        foreach (var folder in FoldersToCopy)
+        {
+            var source = Path.Combine(sourceProfile, folder);
+            var destination = Path.Combine(destinationProfile, folder);
+
+            if (!Directory.Exists(source))
+            {
+                Console.WriteLine($"Skipping missing folder: {folder}");
+                continue;
+            }
+
+            Console.WriteLine($"Copying {folder}...");
+
+            var result = RunRobocopy(source, destination);
+
+            if (result <= 7)
+            {
+                Console.WriteLine($"Successfully copied {folder}");
+            }
+            else
+            {
+                Console.WriteLine($"Failed to copy {folder}. Exit code: {result}");
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Profile copy complete.");
+        Console.WriteLine("Have the user sign out and back in.");
+        return 0;
+    }
+
+    private static int RunRobocopy(string source, string destination)
+    {
+        Directory.CreateDirectory(destination);
+
+        var arguments =
+            $"\"{source}\" \"{destination}\" /E /COPY:DAT /DCOPY:DAT /R:2 /W:2 /XJ /MT:8";
+
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "robocopy.exe",
+                Arguments = arguments,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = false
+            }
+        };
+
+        process.OutputDataReceived += (_, e) =>
+        {
+            if (!string.IsNullOrWhiteSpace(e.Data))
+                Console.WriteLine(e.Data);
+        };
+
+        process.ErrorDataReceived += (_, e) =>
+        {
+            if (!string.IsNullOrWhiteSpace(e.Data))
+                Console.WriteLine(e.Data);
+        };
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        process.WaitForExit();
+
+        return process.ExitCode;
+    }
+
+    private static void PauseBeforeExit()
+    {
+        Console.WriteLine();
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
+    }
+}
