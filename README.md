@@ -142,7 +142,7 @@ This automated approach dramatically reduces the time required for profile migra
 <img width="434" height="169" alt="ProfileMigrator Final Confirmation Screen" src="https://github.com/user-attachments/assets/722d0cb0-1216-474f-b894-d6fcae249726" />
 
 
-These screenshots provide visual evidence of the application's functionality and improve documentation quality.
+These screenshots provide visual evidence of the application's functionality.
 
 ---
 
