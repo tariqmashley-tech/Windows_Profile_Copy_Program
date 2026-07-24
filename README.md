@@ -138,8 +138,9 @@ This automated approach dramatically reduces the time required for profile migra
 * Error reporting example
 <img width="986" height="338" alt="ProfileMigrator Failure Screen" src="https://github.com/user-attachments/assets/10c34154-7cca-4c61-8368-4720da8af243" />
 
-* Completion summary
-* Successful migration confirmation
+* Completion summary and confirmation
+<img width="434" height="169" alt="ProfileMigrator Final Confirmation Screen" src="https://github.com/user-attachments/assets/722d0cb0-1216-474f-b894-d6fcae249726" />
+
 
 These screenshots provide visual evidence of the application's functionality and improve documentation quality.
 
