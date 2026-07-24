@@ -135,8 +135,9 @@ This automated approach dramatically reduces the time required for profile migra
 * Migration progress and RoboCopy execution log
 <img width="1089" height="1043" alt="ProfileMigrator Progress Screenshot" src="https://github.com/user-attachments/assets/a37ebf9f-6e8a-4b1c-a2ee-f39f8614e7d1" />
 
-* RoboCopy execution log
 * Error reporting example
+<img width="986" height="338" alt="ProfileMigrator Failure Screen" src="https://github.com/user-attachments/assets/10c34154-7cca-4c61-8368-4720da8af243" />
+
 * Completion summary
 * Successful migration confirmation
 
