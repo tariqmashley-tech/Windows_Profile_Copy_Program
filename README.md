@@ -126,8 +126,9 @@ This automated approach dramatically reduces the time required for profile migra
 * Application startup screen
 <img width="670" height="382" alt="image" src="https://github.com/user-attachments/assets/3e156426-cb40-4a35-8476-74659e04d462" />
 
-* Source profile selection
-* Destination profile selection
+* Source and destination profile selection
+<img width="668" height="383" alt="image" src="https://github.com/user-attachments/assets/a4b90555-79c5-43a8-8c9b-956fcc6aafe4" />
+
 * Validation screen
 * Migration progress window
 * RoboCopy execution log
