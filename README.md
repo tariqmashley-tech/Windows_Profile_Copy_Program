@@ -123,11 +123,9 @@ This automated approach dramatically reduces the time required for profile migra
 
 # Section 5: Screenshots
 
-Include screenshots demonstrating the application's workflow.
-
-### Suggested Screenshots
-
 * Application startup screen
+<img width="670" height="382" alt="image" src="https://github.com/user-attachments/assets/3e156426-cb40-4a35-8476-74659e04d462" />
+
 * Source profile selection
 * Destination profile selection
 * Validation screen
